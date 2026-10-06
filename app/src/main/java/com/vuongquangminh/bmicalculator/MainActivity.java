@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private MaterialButton btnCalculate;
     private MaterialCardView cardResult;
     private TextView tvBmiResult, tvBmiCategory;
+    private TextView tvIdealWeight, tvAdvice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
         cardResult = findViewById(R.id.cardResult);
         tvBmiResult = findViewById(R.id.tvBmiResult);
         tvBmiCategory = findViewById(R.id.tvBmiCategory);
+        tvIdealWeight = findViewById(R.id.tvIdealWeight);
+        tvAdvice = findViewById(R.id.tvAdvice);
     }
 
     private void calculateBMI() {
@@ -80,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
             // Show results
             tvBmiResult.setText(String.format(Locale.getDefault(), "%.1f", bmi));
-            evaluateBMI(bmi);
+            evaluateBMI(bmi, heightM);
             cardResult.setVisibility(View.VISIBLE);
 
         } catch (NumberFormatException e) {
@@ -88,25 +91,37 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void evaluateBMI(double bmi) {
+    private void evaluateBMI(double bmi, double heightM) {
         String category;
+        String advice;
         int color;
 
         if (bmi < 18.5) {
             category = "Underweight";
+            advice = "💡 Advice: You should boost your nutrition and do workouts to build muscle.";
             color = Color.parseColor("#3B82F6");
         } else if (bmi < 25.0) {
             category = "Normal";
+            advice = "💡 Advice: Awesome! Keep up your current diet and exercise routine.";
             color = Color.parseColor("#10B981");
         } else if (bmi < 30.0) {
             category = "Overweight";
+            advice = "💡 Advice: You should cut down on sweets and carbs, and exercise more.";
             color = Color.parseColor("#F59E0B");
         } else {
             category = "Obese";
+            advice = " 💡 Advice: You should check with a doctor or nutrition expert to get a weight loss plan.";
             color = Color.parseColor("#EF4444");
         }
 
+        // Calculate ideal weight range
+        double minWeight = 18.5 * (heightM * heightM);
+        double maxWeight = 24.9 * (heightM * heightM);
+        String idealRangeStr = String.format(Locale.getDefault(), "Ideal weight for this height: %.1f kg - %.1f kg", minWeight, maxWeight);
+
         tvBmiCategory.setText(category);
         tvBmiCategory.setTextColor(color);
+        tvIdealWeight.setText(idealRangeStr);
+        tvAdvice.setText(advice);
     }
 }

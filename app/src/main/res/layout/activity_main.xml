@@ -40,9 +40,29 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="Tính toán chỉ số khối cơ thể &amp; Đánh giá sức khỏe"
+                    android:text="Body Mass Index Calculation &amp; Health Assessment"
                     android:textColor="#94A3B8"
                     android:textSize="13sp" />
+
+                <!-- About the ideal weight -->
+                <TextView
+                    android:id="@+id/tvIdealWeight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textColor="#475569"
+                    android:textSize="13sp"
+                    android:textStyle="italic" />
+
+                <!-- Health tips -->
+                <TextView
+                    android:id="@+id/tvAdvice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:textAlignment="center"
+                    android:textColor="#334155"
+                    android:textSize="14sp" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
